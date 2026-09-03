@@ -41,10 +41,12 @@
             </div>
             <div class="window-title">
               <span class="python-icon">🐍</span>
-              <span>Python Turtle Graphics - [spiderman.py]</span>
+              <span>Python Turtle Graphics - [spiderman_gwen.py]</span>
             </div>
             <div class="window-actions">
-              <button id="themeToggleBtn" class="mini-btn" title="Toggle Canvas Invert">🌓 Invert</button>
+              <button id="soundToggleBtn" class="mini-btn" title="Toggle Sound (M)">🔊 Sound ON</button>
+              <button id="camToggleBtn" class="mini-btn" title="Toggle Camera Follow (C)">🎥 Drone Cam</button>
+              <button id="exportBtn" class="mini-btn highlight" title="Export HD PNG">📥 Export HD</button>
             </div>
           </div>
 
@@ -77,6 +79,17 @@
             <button id="instantBtn" class="action-btn btn-secondary" title="Finish Instantly">
               <span>⚡</span> <span>Instant</span>
             </button>
+          </div>
+
+          <!-- Style Preset Switcher -->
+          <div class="style-presets">
+            <span class="control-label">Art Style:</span>
+            <div class="preset-pills">
+              <button class="pill-btn active" data-style="classic">Classic B&W</button>
+              <button class="pill-btn" data-style="neon">Neon Comic</button>
+              <button class="pill-btn" data-style="clocktower">Clocktower</button>
+              <button class="pill-btn" data-style="blueprint">Blueprint</button>
+            </div>
           </div>
 
           <div class="slider-control">
