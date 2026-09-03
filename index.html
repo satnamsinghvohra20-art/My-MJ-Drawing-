@@ -44,33 +44,21 @@
               <span>Python Turtle Graphics - [spiderman_gwen.py]</span>
             </div>
             <div class="window-actions">
-              <button id="realSceneBtn" class="mini-btn highlight" title="Toggle Full Color Real Scene">🎬 Movie Scene</button>
-              <button id="sketchSceneBtn" class="mini-btn highlight" title="Toggle Comic Sketch Drawing">🎨 Comic Drawing</button>
+              <button id="modeSilhouetteBtn" class="mini-btn active" title="Switch to Vector Silhouette Mode">🖤 Silhouette Mode</button>
+              <button id="modeRealSceneBtn" class="mini-btn highlight" title="Draw Real Scene Step-by-Step with Code">🎨 Real Scene Painter</button>
               <button id="soundToggleBtn" class="mini-btn" title="Toggle Sound (M)">🔊 Sound ON</button>
               <button id="camToggleBtn" class="mini-btn" title="Toggle Camera Follow (C)">🎥 Drone Cam</button>
               <button id="exportBtn" class="mini-btn" title="Export HD PNG">📥 Export HD</button>
             </div>
           </div>
 
-          <!-- Canvas Display -->
-          <div class="canvas-wrapper">
+          <!-- Canvas Display (100% Pure Generative Code) -->
+          <div class="canvas-wrapper" id="canvasWrapper">
             <canvas id="turtleCanvas"></canvas>
             
-            <!-- Real Scene Full Color Overlay -->
-            <div id="realSceneOverlay" class="real-scene-overlay hidden">
-              <img src="scene_full_color.jpg" alt="Spider-Man & Gwen Stacy Clock Tower Scene in Full Color" id="realSceneImg">
-              <div class="scene-badge">Full Color Cinematic Scene</div>
-            </div>
-
-            <!-- Comic Sketch Drawing Overlay -->
-            <div id="sketchSceneOverlay" class="real-scene-overlay hidden">
-              <img src="scene_real_drawing.jpg" alt="Spider-Man & Gwen Stacy Comic Sketch Drawing" id="sketchSceneImg">
-              <div class="scene-badge">Hand-Drawn Comic Line Art & Pencil Sketch</div>
-            </div>
-            
-            <!-- Live Pen Overlay Cursor -->
+            <!-- Live Pen / Brush Overlay Cursor -->
             <div id="turtlePen" class="turtle-cursor">
-              <div class="pen-tip"></div>
+              <div class="pen-tip" id="penTip"></div>
               <div class="pen-coords" id="penCoords">(-7, 348)</div>
             </div>
           </div>
@@ -95,8 +83,22 @@
             </button>
           </div>
 
+          <!-- Stage Stepper for Procedural Real Scene Painting -->
+          <div class="stage-stepper hidden" id="stageStepper">
+            <span class="control-label">Scene Stage:</span>
+            <div class="stage-pills" id="stagePills">
+              <button class="stage-pill active" data-stage="all">Full Sequence</button>
+              <button class="stage-pill" data-stage="1">1. Timber Beams</button>
+              <button class="stage-pill" data-stage="2">2. Clock & Gears</button>
+              <button class="stage-pill" data-stage="3">3. Spider-Man</button>
+              <button class="stage-pill" data-stage="4">4. Web Line</button>
+              <button class="stage-pill" data-stage="5">5. Gwen Stacy</button>
+              <button class="stage-pill" data-stage="6">6. Lighting & FX</button>
+            </div>
+          </div>
+
           <!-- Style Preset Switcher -->
-          <div class="style-presets">
+          <div class="style-presets" id="stylePresets">
             <span class="control-label">Art Style:</span>
             <div class="preset-pills">
               <button class="pill-btn active" data-style="classic">Classic B&W</button>

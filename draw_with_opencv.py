@@ -20,26 +20,31 @@ import sys
 STEP_DELAY = 0.008
 
 def draw_spiderman():
-    # 1. Load the silhouette image
-    image_path = 'spiderman.png'
-    if not os.path.exists(image_path):
-        image_path = 'spiderman.jpg'
-        
-    img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    if img is None:
-        raise FileNotFoundError(f"Could not find image at {image_path}")
+    # 1. Check for image or fallback to precomputed pure vector contours
+    image_path = 'spiderman.png' if os.path.exists('spiderman.png') else ('spiderman.jpg' if os.path.exists('spiderman.jpg') else None)
+    
+    contours_pts = []
+    width, height = 1000, 760
 
-    height, width = img.shape
+    if image_path and os.path.exists(image_path):
+        img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        if img is not None:
+            height, width = img.shape
+            _, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+            contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+            valid_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > 20]
+            valid_contours.sort(key=cv2.contourArea, reverse=True)
+            for cnt in valid_contours:
+                pts = [(int(p[0][0] - width // 2), int(height // 2 - p[0][1])) for p in cnt]
+                contours_pts.append(pts)
 
-    # 2. Binary threshold (invert so the black silhouette becomes white foreground for contouring)
-    _, thresh = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
-
-    # 3. Find boundary contours using cv2.CHAIN_APPROX_NONE (extracts all boundary points)
-    contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
-
-    # Filter out small noise artifacts and sort by area descending (main silhouette first)
-    valid_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > 20]
-    valid_contours.sort(key=cv2.contourArea, reverse=True)
+    if not contours_pts:
+        try:
+            from contours_data import CONTOURS, CANVAS_WIDTH, CANVAS_HEIGHT
+            contours_pts = CONTOURS
+            width, height = CANVAS_WIDTH, CANVAS_HEIGHT
+        except ImportError:
+            raise FileNotFoundError("Could not find image or vector contour data.")
 
     # 4. Set up Turtle Window
     screen = turtle.Screen()
