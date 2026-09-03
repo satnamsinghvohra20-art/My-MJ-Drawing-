@@ -44,15 +44,22 @@
               <span>Python Turtle Graphics - [spiderman_gwen.py]</span>
             </div>
             <div class="window-actions">
+              <button id="realSceneBtn" class="mini-btn highlight" title="Toggle Full Color Real Scene">🎬 Real Scene</button>
               <button id="soundToggleBtn" class="mini-btn" title="Toggle Sound (M)">🔊 Sound ON</button>
               <button id="camToggleBtn" class="mini-btn" title="Toggle Camera Follow (C)">🎥 Drone Cam</button>
-              <button id="exportBtn" class="mini-btn highlight" title="Export HD PNG">📥 Export HD</button>
+              <button id="exportBtn" class="mini-btn" title="Export HD PNG">📥 Export HD</button>
             </div>
           </div>
 
           <!-- Canvas Display -->
           <div class="canvas-wrapper">
             <canvas id="turtleCanvas"></canvas>
+            
+            <!-- Real Scene Full Color Overlay -->
+            <div id="realSceneOverlay" class="real-scene-overlay hidden">
+              <img src="scene_full_color.jpg" alt="Spider-Man & Gwen Stacy Clock Tower Scene in Full Color" id="realSceneImg">
+              <div class="scene-badge">Full Color Cinematic Scene</div>
+            </div>
             
             <!-- Live Pen Overlay Cursor -->
             <div id="turtlePen" class="turtle-cursor">

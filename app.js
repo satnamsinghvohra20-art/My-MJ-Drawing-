@@ -24,6 +24,9 @@ const speedDisplay = document.getElementById('speedDisplay');
 const canvasWrapper = document.querySelector('.canvas-wrapper');
 
 // Advanced Control Elements
+const realSceneBtn = document.getElementById('realSceneBtn');
+const realSceneOverlay = document.getElementById('realSceneOverlay');
+let realSceneActive = false;
 const soundToggleBtn = document.getElementById('soundToggleBtn');
 const camToggleBtn = document.getElementById('camToggleBtn');
 const exportBtn = document.getElementById('exportBtn');
@@ -536,6 +539,14 @@ playPauseBtn.addEventListener('click', togglePlayPause);
 restartBtn.addEventListener('click', restartDrawing);
 instantBtn.addEventListener('click', instantFinish);
 exportBtn.addEventListener('click', exportHD);
+
+// Real Scene View Toggle
+realSceneBtn.addEventListener('click', () => {
+  realSceneActive = !realSceneActive;
+  realSceneOverlay.classList.toggle('hidden', !realSceneActive);
+  realSceneBtn.classList.toggle('active', realSceneActive);
+  realSceneBtn.textContent = realSceneActive ? '🎨 Vector View' : '🎬 Real Scene';
+});
 
 // Sound Toggle
 soundToggleBtn.addEventListener('click', () => {
