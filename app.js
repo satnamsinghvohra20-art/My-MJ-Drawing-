@@ -27,6 +27,9 @@ const canvasWrapper = document.querySelector('.canvas-wrapper');
 const realSceneBtn = document.getElementById('realSceneBtn');
 const realSceneOverlay = document.getElementById('realSceneOverlay');
 let realSceneActive = false;
+const sketchSceneBtn = document.getElementById('sketchSceneBtn');
+const sketchSceneOverlay = document.getElementById('sketchSceneOverlay');
+let sketchSceneActive = false;
 const soundToggleBtn = document.getElementById('soundToggleBtn');
 const camToggleBtn = document.getElementById('camToggleBtn');
 const exportBtn = document.getElementById('exportBtn');
@@ -543,9 +546,25 @@ exportBtn.addEventListener('click', exportHD);
 // Real Scene View Toggle
 realSceneBtn.addEventListener('click', () => {
   realSceneActive = !realSceneActive;
+  if (realSceneActive) {
+    sketchSceneActive = false;
+    sketchSceneOverlay.classList.add('hidden');
+    sketchSceneBtn.classList.remove('active');
+  }
   realSceneOverlay.classList.toggle('hidden', !realSceneActive);
   realSceneBtn.classList.toggle('active', realSceneActive);
-  realSceneBtn.textContent = realSceneActive ? '🎨 Vector View' : '🎬 Real Scene';
+});
+
+// Comic Sketch View Toggle
+sketchSceneBtn.addEventListener('click', () => {
+  sketchSceneActive = !sketchSceneActive;
+  if (sketchSceneActive) {
+    realSceneActive = false;
+    realSceneOverlay.classList.add('hidden');
+    realSceneBtn.classList.remove('active');
+  }
+  sketchSceneOverlay.classList.toggle('hidden', !sketchSceneActive);
+  sketchSceneBtn.classList.toggle('active', sketchSceneActive);
 });
 
 // Sound Toggle

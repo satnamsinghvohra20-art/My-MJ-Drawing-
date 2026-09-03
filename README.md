@@ -54,6 +54,15 @@ Or run the dedicated OpenCV script:
 
 ---
 
+### Option 4: 🎨 Draw the Real Scene in Multi-Color Comic Ink
+Draw the full-color comic book sketch of Spider-Man and Gwen falling in the clock tower:
+
+```powershell
+.venv\Scripts\python.exe draw_real_scene.py
+```
+
+---
+
 ## ⌨️ Live Controls While Drawing
 
 While the Turtle Graphics window is drawing:
