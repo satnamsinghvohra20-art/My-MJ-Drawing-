@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spider-Man & Gwen Stacy | Python Turtle Simulator</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕷️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <span class="spider-badge">🕷️</span>
+        <div>
+          <h1>Spider-Man & Gwen Stacy</h1>
+          <p class="subtitle">Python Turtle & OpenCV Contour Simulation</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <span id="phaseBadge" class="badge badge-phase">Initializing...</span>
+        <span id="statusIndicator" class="badge badge-status running">Drawing</span>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-layout">
+      <!-- Left / Center: Window Container -->
+      <section class="viewport-section">
+        <div class="os-window" id="osWindow">
+          <!-- Window Titlebar -->
+          <div class="window-titlebar">
+            <div class="window-controls">
+              <span class="control-dot close"></span>
+              <span class="control-dot minimize"></span>
+              <span class="control-dot maximize"></span>
+            </div>
+            <div class="window-title">
+              <span class="python-icon">🐍</span>
+              <span>Python Turtle Graphics - [spiderman.py]</span>
+            </div>
+            <div class="window-actions">
+              <button id="themeToggleBtn" class="mini-btn" title="Toggle Canvas Invert">🌓 Invert</button>
+            </div>
+          </div>
+
+          <!-- Canvas Display -->
+          <div class="canvas-wrapper">
+            <canvas id="turtleCanvas"></canvas>
+            
+            <!-- Live Pen Overlay Cursor -->
+            <div id="turtlePen" class="turtle-cursor">
+              <div class="pen-tip"></div>
+              <div class="pen-coords" id="penCoords">(-7, 348)</div>
+            </div>
+          </div>
+
+          <!-- Progress Bar under window -->
+          <div class="window-progress">
+            <div id="progressBar" class="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Control Deck -->
+        <div class="control-deck">
+          <div class="primary-controls">
+            <button id="playPauseBtn" class="action-btn btn-primary" title="Play / Pause (Space)">
+              <span id="playIcon">⏸️</span> <span id="playText">Pause</span>
+            </button>
+            <button id="restartBtn" class="action-btn btn-secondary" title="Restart Drawing (R)">
+              <span>🔄</span> <span>Restart</span>
+            </button>
+            <button id="instantBtn" class="action-btn btn-secondary" title="Finish Instantly">
+              <span>⚡</span> <span>Instant</span>
+            </button>
+          </div>
+
+          <div class="slider-control">
+            <div class="slider-header">
+              <span class="control-label">Drawing Speed:</span>
+              <span id="speedDisplay" class="speed-value">1.0x (Normal)</span>
+            </div>
+            <input type="range" id="speedSlider" min="1" max="10" value="4" step="1">
+            <div class="slider-ticks">
+              <span>Very Slow</span>
+              <span>Normal</span>
+              <span>Cinematic</span>
+              <span>Turbo</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: Telemetry & Code Inspector -->
+      <aside class="sidebar-section">
+        <!-- Telemetry Card -->
+        <div class="card telemetry-card">
+          <h2 class="card-title">Live Telemetry</h2>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Progress</span>
+              <span id="statPercent" class="stat-value highlight">0%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Vector Points</span>
+              <span id="statPoints" class="stat-value">0 / 2,130</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Coordinate (X, Y)</span>
+              <span id="statCoords" class="stat-value">0, 0</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label">Elapsed Time</span>
+              <span id="statTime" class="stat-value">0.0s</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Execution Inspector -->
+        <div class="card code-card">
+          <div class="card-header-flex">
+            <h2 class="card-title">Python Code Trace</h2>
+            <span class="code-lang">python</span>
+          </div>
+          <div class="code-viewer">
+            <pre><code id="codeBlock">
+<span class="code-line" id="codeLine1"><span class="kw">import</span> cv2, turtle</span>
+<span class="code-line" id="codeLine2">img = cv2.imread(<span class="str">'spiderman.png'</span>, <span class="num">0</span>)</span>
+<span class="code-line" id="codeLine3">_, thresh = cv2.threshold(img, <span class="num">127</span>, <span class="num">255</span>, <span class="const">THRESH_INV</span>)</span>
+<span class="code-line" id="codeLine4">contours, _ = cv2.findContours(thresh, <span class="const">CHAIN_APPROX_NONE</span>)</span>
+<span class="code-line" id="codeLine5">t = turtle.Turtle()</span>
+<span class="code-line" id="codeLine6">t.color(<span class="str">'black'</span>); t.begin_fill()</span>
+<span class="code-line active" id="codeLine7"><span class="kw">for</span> pt <span class="kw">in</span> contour:</span>
+<span class="code-line active" id="codeLine8">    t.goto(pt.x, pt.y)  <span class="comment"># Drawing step-by-step</span></span>
+<span class="code-line" id="codeLine9">t.end_fill()  <span class="comment"># Fill silhouette</span></span>
+            </code></pre>
+          </div>
+        </div>
+
+        <!-- Narrative Context Card -->
+        <div class="card story-card">
+          <h2 class="card-title">The Story Behind the Scene</h2>
+          <p class="story-desc">
+            Inspired by <em>The Amazing Spider-Man #121</em> & <em>The Amazing Spider-Man 2</em>: 
+            Spider-Man desperately launches a web line from above to catch Gwen Stacy as she falls, 
+            immortalized here in an iconic minimalist silhouette.
+          </p>
+          <div class="keyboard-hints">
+            <div class="hint-item"><kbd>Space</kbd> Play / Pause</div>
+            <div class="hint-item"><kbd>R</kbd> Restart</div>
+            <div class="hint-item"><kbd>↑ / ↓</kbd> Speed</div>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
