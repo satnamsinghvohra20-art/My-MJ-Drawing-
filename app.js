@@ -527,10 +527,10 @@ function exportHD() {
   // Watermark
   ectx.fillStyle = currentStyle === 'classic' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.4)';
   ectx.font = '24px Outfit, sans-serif';
-  ectx.fillText('Spider-Man & Gwen Stacy | Python Turtle Simulator', 60, 1020);
+  ectx.fillText('Spider-Man & Mary Jane (2002) | Queensboro Bridge Rescue', 60, 1020);
 
   const link = document.createElement('a');
-  link.download = `spiderman_gwen_${currentStyle}_hd.png`;
+  link.download = `spiderman_mj_2002_${currentStyle}_hd.png`;
   link.href = exportCanvas.toDataURL('image/png');
   link.click();
 }

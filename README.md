@@ -1,16 +1,16 @@
-# 🕷️ Spider-Man & Gwen Stacy Drawing in Python (Turtle Graphics)
+# 🕷️ Spider-Man & Mary Jane (2002) Drawing in Python (Turtle Graphics)
 
-A Python project that animates and draws the iconic silhouette of **Spider-Man hanging by a web thread to catch the falling Gwen Stacy**, rendered **slowly step-by-step** using **Python's Turtle Graphics** and **OpenCV (`cv2.CHAIN_APPROX_NONE`)**.
+A Python project that animates and draws the iconic silhouette of **Spider-Man (Tobey Maguire) holding a web thread to catch Mary Jane Watson (Kirsten Dunst)** from the 2002 Queensboro Bridge climax, rendered **slowly step-by-step** using **Python's Turtle Graphics** and **OpenCV (`cv2.CHAIN_APPROX_NONE`)**.
 
 ---
 
 ## 🎥 Step-by-Step Drawing Animation
 
 Unlike static image displayers, this script **animates the physical pen cursor moving across the screen coordinate-by-coordinate in real-time**:
-1. **Spider-Man** is traced slowly at the top hanging upside down.
+1. **Spider-Man** is traced slowly at the top hanging from the bridge web cables.
 2. The **web thread** descends smoothly through the middle of the screen.
-3. **Gwen Stacy** is sketched at the bottom with flowing hair and outstretched arms.
-4. The silhouette is filled with solid black, and the pen hides.
+3. **Mary Jane** is sketched at the bottom suspended in mid-air with outstretched arms and flowing hair.
+4. The silhouette is filled, and the pen hides.
 
 ---
 
